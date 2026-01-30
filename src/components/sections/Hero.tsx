@@ -26,6 +26,13 @@ export function Hero() {
   const [displayedText, setDisplayedText] = useState('')
   const [isTyping, setIsTyping] = useState(true)
 
+  const scrollToPricing = () => {
+    const pricingSection = document.getElementById('pricing')
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   useEffect(() => {
     if (displayedText.length < fullText.length) {
       const timeout = setTimeout(() => {
@@ -139,6 +146,7 @@ export function Hero() {
             >
               <Button 
                 type="button"
+                onClick={scrollToPricing}
                 size="lg" 
                 className="bg-[#FD7E35] hover:bg-[#E0601A] text-white border-none rounded-full px-8 font-semibold text-lg shadow-[0_4px_14px_0_rgba(253,126,53,0.39)] hover:shadow-[0_6px_20px_rgba(253,126,53,0.23)] hover:-translate-y-1 transition-all"
                 data-event="cta_click"

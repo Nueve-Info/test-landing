@@ -8,6 +8,7 @@ declare global {
   interface Window {
     dataLayer: Record<string, unknown>[]
     __gtmTrackingInstalled?: boolean
+    fbq?: (action: string, event: string, params?: Record<string, unknown>) => void
   }
 }
 
@@ -35,31 +36,62 @@ if (!window.__gtmTrackingInstalled) {
   }
 
   function handleCtaClick(el: HTMLElement) {
+    const ctaType = attr(el, 'data-cta-type') || attr(el, 'data-cta_type') || 'unknown'
+    const ctaPlacement = attr(el, 'data-cta-placement') || attr(el, 'data-cta_placement') || attr(el, 'data-cta_location') || 'unknown'
+    
     push({
       event: 'cta_click',
-      cta_type: attr(el, 'data-cta-type') || attr(el, 'data-cta_type') || 'unknown',
-      cta_placement: attr(el, 'data-cta-placement') || attr(el, 'data-cta_placement') || attr(el, 'data-cta_location') || 'unknown',
+      cta_type: ctaType,
+      cta_placement: ctaPlacement,
       cta_label: (el.innerText && el.innerText.trim()) || attr(el, 'aria-label') || 'cta',
       cta_href: (el as HTMLAnchorElement).href || attr(el, 'href') || null,
       page_path: location.pathname,
       page_title: document.title
     })
+
+    // Meta Pixel: Track AddToCart for "start" CTA buttons
+    if (ctaType === 'start' && window.fbq) {
+      window.fbq('track', 'AddToCart', {
+        content_name: (el.innerText && el.innerText.trim()) || 'Start CTA',
+        content_category: 'CTA',
+        content_ids: ['start_cta'],
+        value: 27,
+        currency: 'USD'
+      })
+    }
   }
 
-  function handleBeginCheckout(el: HTMLElement) {
+  function handleSelectPlan(el: HTMLElement) {
     const priceStr = attr(el, 'data-price')
+    const planType = attr(el, 'data-plan-type') || attr(el, 'data-plan_type') || null
+    const price = priceStr ? Number(priceStr) : null
+    const currency = attr(el, 'data-currency') || 'USD'
+    const ctaLabel = (el.innerText && el.innerText.trim()) || attr(el, 'aria-label') || 'select_plan'
+    
     push({
-      event: 'begin_checkout',
-      plan_type: attr(el, 'data-plan-type') || attr(el, 'data-plan_type') || null,
+      event: 'select_plan',
+      plan_type: planType,
       billing: attr(el, 'data-billing') || null,
-      price: priceStr ? Number(priceStr) : null,
-      currency: attr(el, 'data-currency') || 'USD',
+      price: price,
+      currency: currency,
       stripe_url: attr(el, 'data-stripe-url') || attr(el, 'data-stripe_url') || (el as HTMLAnchorElement).href || null,
       cta_placement: attr(el, 'data-cta-placement') || attr(el, 'data-cta_placement') || null,
-      cta_label: (el.innerText && el.innerText.trim()) || attr(el, 'aria-label') || 'checkout',
+      cta_label: ctaLabel,
       page_path: location.pathname,
       page_title: document.title
     })
+
+    // Meta Pixel: Track Purchase event
+    if (window.fbq && price !== null) {
+      window.fbq('track', 'Purchase', {
+        value: price,
+        currency: currency,
+        content_name: ctaLabel,
+        content_category: 'Plan Selection',
+        content_ids: [planType || 'early_adopter'],
+        content_type: 'product'
+      })
+    }
   }
 
   document.addEventListener('click', (e) => {
@@ -70,8 +102,8 @@ if (!window.__gtmTrackingInstalled) {
 
     if (eventType === 'cta_click') {
       handleCtaClick(el)
-    } else if (eventType === 'begin_checkout') {
-      handleBeginCheckout(el)
+    } else if (eventType === 'select_plan') {
+      handleSelectPlan(el)
     }
 
     // Optional navigation delay for same-tab links (to ensure dataLayer push completes)
@@ -95,8 +127,8 @@ if (!window.__gtmTrackingInstalled) {
     const eventType = attr(el, 'data-event')
     if (eventType === 'cta_click') {
       handleCtaClick(el)
-    } else if (eventType === 'begin_checkout') {
-      handleBeginCheckout(el)
+    } else if (eventType === 'select_plan') {
+      handleSelectPlan(el)
     }
   })
 }

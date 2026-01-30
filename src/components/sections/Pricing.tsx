@@ -65,13 +65,14 @@ export function Pricing() {
 
             {/* CTA */}
             <Button 
+              type="button"
               variant="cta" 
               size="lg" 
               className="js-select-plan w-full mb-6 text-lg font-bold bg-emerald-500 hover:bg-emerald-600 shadow-[0_4px_20px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_25px_rgba(16,185,129,0.6)] hover:scale-[1.02] transition-all duration-300"
               href="https://buy.stripe.com/3cI28qeA31KP5wl0COgA81A"
               target="_blank"
               rel="noopener noreferrer"
-              data-event="begin_checkout"
+              data-event="select_plan"
               data-plan-type="early_adopter"
               data-billing="one_time"
               data-price="27"

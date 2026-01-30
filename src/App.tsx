@@ -4,6 +4,7 @@ import { DesignToolVariant } from './pages/DesignToolVariant'
 import { DevModeVariant } from './pages/DevModeVariant'
 import { PortfolioVariant } from './pages/PortfolioVariant'
 import { PrivacyPolicy } from './pages/PrivacyPolicy'
+import { ThankYou } from './pages/ThankYou'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/dev-mode" element={<DevModeVariant />} />
         <Route path="/portfolio" element={<PortfolioVariant />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/thank-you" element={<ThankYou />} />
       </Routes>
     </BrowserRouter>
   )

@@ -20,13 +20,14 @@ export function FinalCTA() {
           </p>
 
           <Button 
+            type="button"
             variant="cta" 
             size="lg" 
             className="js-select-plan mb-8"
             href="https://buy.stripe.com/3cI28qeA31KP5wl0COgA81A"
             target="_blank"
             rel="noopener noreferrer"
-            data-event="begin_checkout"
+            data-event="select_plan"
             data-plan-type="early_adopter"
             data-billing="one_time"
             data-price="27"
