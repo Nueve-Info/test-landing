@@ -4,27 +4,76 @@
   --font-family-display: 'Inter', system-ui, -apple-system, sans-serif;
   --font-family-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Purple/Electric Blue accent colors */
-  --color-primary: #7C3AED;
-  --color-primary-light: #A78BFA;
-  --color-primary-dark: #5B21B6;
-  --color-accent: #06B6D4;
-  --color-accent-light: #22D3EE;
+  /* Design Engineer Orange Theme (Default) */
+  --color-primary: #FD7E35;
+  --color-primary-light: #FF9B60;
+  --color-primary-dark: #E0601A;
+  --color-accent: #FD7E35;
+  --color-accent-light: #FFAB76;
 
   /* Dark theme colors */
-  --color-surface-dark: #0F0F1A;
-  --color-surface: #1A1A2E;
-  --color-surface-light: #252542;
-  --color-surface-elevated: #2D2D4A;
+  --color-surface-dark: #121212;
+  --color-surface: #1E1E1E;
+  --color-surface-light: #2A2A2A;
+  --color-surface-elevated: #333333;
 
   /* CTA red/urgent color */
   --color-cta: #EF4444;
   --color-cta-hover: #DC2626;
 
-  /* Text colors */
+  /* Text colors - DEFAULT */
   --color-text-primary: #F8FAFC;
   --color-text-secondary: #94A3B8;
   --color-text-muted: #64748B;
+}
+
+/* Design Tool Theme (Light Mode) */
+.theme-design-tool {
+  --color-primary: #18A0FB;
+  --color-primary-light: #60BCFC;
+  --color-primary-dark: #0D8ADB;
+  --color-accent: #F24E1E; /* Figma Orange-ish for contrast */
+  
+  --color-surface-dark: #F3F4F6;
+  --color-surface: #FFFFFF;
+  --color-surface-light: #E5E7EB;
+  --color-surface-elevated: #F9FAFB;
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #4B5563;
+  --color-text-muted: #9CA3AF;
+
+  --color-cta: #18A0FB;
+  --color-cta-hover: #0D8ADB;
+}
+
+/* Dev Mode Theme (Darker, Neon) */
+.theme-dev-mode {
+  --color-primary: #00FF94; /* Neon Green */
+  --color-primary-light: #66FFAA;
+  --color-primary-dark: #00CC75;
+  --color-accent: #B026FF; /* Neon Purple */
+  
+  --color-surface-dark: #050505;
+  --color-surface: #0A0A0A;
+  --color-surface-light: #171717;
+  --color-surface-elevated: #262626;
+
+  --color-text-primary: #E5E5E5;
+  --color-text-secondary: #A3A3A3;
+  --color-text-muted: #525252;
+  
+  --color-cta: #00FF94;
+  --color-cta-hover: #00CC75;
+}
+
+/* Portfolio Theme (Clean, Soft Dark) */
+.theme-portfolio {
+  --color-primary: #3B82F6;
+  --color-surface-dark: #000000;
+  --color-surface: #1C1C1E; /* Apple-esque gray */
+  --color-surface-light: #2C2C2E;
+  --color-surface-elevated: #3A3A3C;
 }
 
 * {
@@ -43,6 +92,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Code snippet aesthetic background pattern */
@@ -53,9 +103,15 @@ body {
   background-size: 20px 20px;
 }
 
+.theme-design-tool .code-bg {
+    background-image:
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+  background: linear-gradient(to right, #FF6600, #FF9933, #FF6600);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -66,8 +122,16 @@ body {
   box-shadow: 0 0 40px rgba(124, 58, 237, 0.3);
 }
 
+.theme-design-tool .glow-primary {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Soft shadow instead of glow */
+}
+
 .glow-cta {
   box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+}
+
+.theme-design-tool .glow-cta {
+    box-shadow: 0 4px 12px rgba(24, 160, 251, 0.3);
 }
 
 /* Animation utilities */
@@ -87,4 +151,28 @@ body {
 
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Logo Marquee Scroll Animation */
+@keyframes logo-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-logo-scroll {
+  animation: logo-scroll 20s linear infinite;
+}
+
+@media (min-width: 640px) {
+  .animate-logo-scroll {
+    animation: logo-scroll 40s linear infinite;
+  }
+}
+
+.animate-logo-scroll:hover {
+  animation-play-state: paused;
 }

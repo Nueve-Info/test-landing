@@ -85,26 +85,61 @@ export function PortfolioSystem() {
 
         {/* Code aesthetic element */}
         <div className="mt-16 max-w-2xl mx-auto">
-          <div className="bg-[var(--color-surface-dark)] rounded-xl border border-[var(--color-surface-light)] overflow-hidden">
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--color-surface-light)]">
+          <div className="bg-[var(--color-surface-dark)] rounded-xl border border-[var(--color-surface-light)] overflow-hidden shadow-2xl">
+            {/* Window Header */}
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--color-surface-light)] bg-[var(--color-surface)]/50">
               <div className="w-3 h-3 rounded-full bg-red-500/60" />
               <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
               <div className="w-3 h-3 rounded-full bg-green-500/60" />
-              <span className="ml-2 text-sm text-[var(--color-text-muted)] font-mono">portfolio-generator.ai</span>
+              <span className="ml-2 text-sm text-[var(--color-text-secondary)] font-medium">AI Portfolio Agent</span>
             </div>
-            <div className="p-6 font-mono text-sm">
-              <div className="text-[var(--color-text-muted)]">// Your AI agent is ready</div>
-              <div className="mt-2">
-                <span className="text-[var(--color-primary-light)]">const</span>
-                <span className="text-[var(--color-text-primary)]"> portfolio</span>
-                <span className="text-[var(--color-text-muted)]"> = </span>
-                <span className="text-[var(--color-accent)]">await</span>
-                <span className="text-yellow-400"> generatePortfolio</span>
-                <span className="text-[var(--color-text-muted)]">(</span>
-                <span className="text-green-400">yourStory</span>
-                <span className="text-[var(--color-text-muted)]">)</span>
+            
+            {/* Window Body */}
+            <div className="p-6 md:p-8">
+              <div className="space-y-4">
+                {/* Step 1 */}
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[var(--color-text-secondary)]">Analyzing your professional story</span>
+                </div>
+
+                {/* Step 2 */}
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[var(--color-text-secondary)]">Generating custom design system</span>
+                </div>
+
+                 {/* Step 3 */}
+                 <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-[var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[var(--color-text-secondary)]">Writing project case studies</span>
+                </div>
+
+                {/* Final Success */}
+                <div className="mt-6 p-4 rounded-lg bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 flex items-center gap-4">
+                   <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] flex items-center justify-center shrink-0">
+                      <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                   </div>
+                   <div>
+                      <div className="text-[var(--color-text-primary)] font-semibold">Portfolio Ready</div>
+                      <div className="text-sm text-[var(--color-text-secondary)]">Generated in a day</div>
+                   </div>
+                </div>
               </div>
-              <div className="mt-2 text-[var(--color-accent)]">✓ Portfolio generated in 23 minutes</div>
             </div>
           </div>
         </div>
