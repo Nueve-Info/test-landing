@@ -8,10 +8,13 @@ import { SocialProof } from '../components/sections/SocialProof'
 import { Pricing } from '../components/sections/Pricing'
 import { FAQ } from '../components/sections/FAQ'
 import { FinalCTA } from '../components/sections/FinalCTA'
+import { Footer } from '../components/sections/Footer'
+import { Navbar } from '../components/Navbar'
 
 export function OriginalLanding() {
   return (
     <main className="min-h-screen">
+      <Navbar />
       <Hero />
       <IndustrySplit />
       <Transformation />
@@ -22,6 +25,7 @@ export function OriginalLanding() {
       <Pricing />
       <FAQ />
       <FinalCTA />
+      <Footer />
     </main>
   )
 }

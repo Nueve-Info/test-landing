@@ -10,10 +10,13 @@ import { SocialProof } from '../components/sections/SocialProof'
 import { Pricing } from '../components/sections/Pricing'
 import { FAQ } from '../components/sections/FAQ'
 import { FinalCTA } from '../components/sections/FinalCTA'
+import { Footer } from '../components/sections/Footer'
+import { Navbar } from '../components/Navbar'
 
 export function DesignToolVariant() {
   return (
     <div className="theme-design-tool min-h-screen bg-[var(--color-surface-dark)] text-[var(--color-text-primary)] font-sans">
+      <Navbar />
       {/* Design Tool UI Shell */}
       <div className="fixed top-0 left-0 w-16 h-full bg-[var(--color-surface)] border-r border-[var(--color-surface-light)] z-40 hidden lg:flex flex-col items-center py-6 gap-6">
         <div className="w-8 h-8 bg-[var(--color-primary)] rounded-md" />
@@ -24,9 +27,9 @@ export function DesignToolVariant() {
         </div>
       </div>
 
-      <div className="lg:pl-16">
+      <div className="lg:pl-16 pt-12 sm:pt-14">
         {/* Top Bar */}
-        <div className="h-14 border-b border-[var(--color-surface-light)] bg-[var(--color-surface)] flex items-center px-6 justify-between sticky top-0 z-30">
+        <div className="h-14 border-b border-[var(--color-surface-light)] bg-[var(--color-surface)] flex items-center px-6 justify-between sticky top-12 sm:top-14 z-30">
           <div className="flex items-center gap-4">
              <span className="font-bold text-lg">Untitled Design System</span>
              <span className="text-[var(--color-text-muted)] text-sm">Edited just now</span>
@@ -118,6 +121,7 @@ export function DesignToolVariant() {
         <Pricing />
         <FAQ />
         <FinalCTA />
+        <Footer />
       </div>
     </div>
   )

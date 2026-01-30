@@ -11,7 +11,7 @@ const offerItems = [
 
 export function Pricing() {
   return (
-    <section className="relative py-24 bg-[var(--color-surface)] overflow-hidden">
+    <section id="pricing" className="relative py-24 bg-[var(--color-surface)] overflow-hidden">
       <BackgroundGlow variant="intense" />
       
       <Container className="relative z-10">
@@ -59,12 +59,26 @@ export function Pricing() {
               <div className="text-[var(--color-text-muted)] text-sm uppercase tracking-wider mb-2 font-semibold">Your Price Today</div>
               <div className="flex items-center justify-center gap-3">
                 <span className="text-5xl sm:text-6xl font-bold bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-sm">$27</span>
-                <span className="bg-[var(--color-cta)] text-white text-sm font-bold px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.4)] animate-pulse">93% OFF</span>
+                <span className="bg-emerald-500 text-white text-sm font-bold px-3 py-1 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.4)] animate-pulse">93% OFF</span>
               </div>
             </div>
 
             {/* CTA */}
-            <Button variant="cta" size="lg" className="w-full mb-6 text-lg font-bold shadow-[0_4px_20px_rgba(239,68,68,0.4)] hover:shadow-[0_6px_25px_rgba(239,68,68,0.6)] hover:scale-[1.02] transition-all duration-300">
+            <Button 
+              variant="cta" 
+              size="lg" 
+              className="js-select-plan w-full mb-6 text-lg font-bold bg-emerald-500 hover:bg-emerald-600 shadow-[0_4px_20px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_25px_rgba(16,185,129,0.6)] hover:scale-[1.02] transition-all duration-300"
+              href="https://buy.stripe.com/3cI28qeA31KP5wl0COgA81A"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-event="begin_checkout"
+              data-plan-type="early_adopter"
+              data-billing="one_time"
+              data-price="27"
+              data-currency="USD"
+              data-stripe-url="https://buy.stripe.com/3cI28qeA31KP5wl0COgA81A"
+              data-cta-placement="pricing"
+            >
               Start Your Transformation ($27)
             </Button>
 
@@ -77,9 +91,9 @@ export function Pricing() {
             </div>
 
             {/* Urgency */}
-            <div className="text-center p-4 bg-[var(--color-cta)]/10 rounded-xl border border-[var(--color-cta)]/30">
-              <div className="text-[var(--color-cta)] font-bold">
-                Early adopter pricing ends January 31st
+            <div className="text-center p-4 bg-emerald-500/10 rounded-xl border border-emerald-500/30">
+              <div className="text-emerald-400 font-bold">
+                Early adopter pricing ends Feb 3rd
               </div>
               <div className="text-sm text-[var(--color-text-muted)]">
                 After that, $97

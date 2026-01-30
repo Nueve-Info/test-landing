@@ -1,12 +1,50 @@
 import { Container } from '../ui/Container'
-import { motion } from 'framer-motion'
-import { VimeoEmbed } from '../ui/VimeoEmbed'
+import { motion, useInView } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 
 const stats = [
-  { value: '66%', label: 'of designers fear AI will replace them' },
-  { value: '33%', label: 'drop in entry-level design hiring' },
-  { value: '40%', label: 'more opportunities for design engineers with coding skills' }
+  { value: '66%', label: 'designer fear AI replacement' },
+  { value: '33%', label: 'drop in design hiring' },
+  { value: '40%', label: 'growth for coding designers ' }
 ]
+
+function AnimatedNumber({ value, className }: { value: string; className?: string }) {
+  const [count, setCount] = useState(0)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  
+  // Extract numeric value and suffix (%)
+  const numericValue = parseInt(value.replace(/\D/g, ''))
+  const suffix = value.replace(/\d/g, '')
+  
+  useEffect(() => {
+    if (!isInView) return
+    
+    const duration = 2000 // 2 seconds
+    const steps = 60
+    const increment = numericValue / steps
+    const stepDuration = duration / steps
+    
+    let current = 0
+    const timer = setInterval(() => {
+      current += increment
+      if (current >= numericValue) {
+        setCount(numericValue)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(current))
+      }
+    }, stepDuration)
+    
+    return () => clearInterval(timer)
+  }, [isInView, numericValue])
+  
+  return (
+    <span ref={ref} className={className}>
+      {count}{suffix}
+    </span>
+  )
+}
 
 export function IndustrySplit() {
   return (
@@ -19,12 +57,11 @@ export function IndustrySplit() {
           </h2>
           <p className="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-3xl mx-auto">
             Design Engineers who harness AI are the most reliable assets in the industry. While traditional designers need to compete for fewer jobs and unsatisfying pay.{' '}
-            <span className="text-[var(--color-text-primary)] font-medium">Which side will you choose?</span>
           </p>
         </div>
 
         {/* Graph Visual */}
-        <div className="relative max-w-3xl mx-auto mb-12 h-72 sm:h-96 bg-[var(--color-surface-dark)] rounded-2xl border border-[var(--color-surface-light)] px-8 pt-8 pb-8 overflow-hidden shadow-2xl">
+        <div className="relative w-full mb-12 aspect-[21/9] min-h-[18rem] sm:min-h-[24rem] bg-[var(--color-surface-dark)] rounded-2xl border border-[var(--color-surface-light)] px-8 pt-8 pb-8 overflow-hidden shadow-2xl">
           {/* Grid lines */}
           <div className="absolute inset-0 px-8 pt-8 pb-12 flex flex-col justify-between pointer-events-none" style={{ paddingTop: '48px' }}>
              {[...Array(5)].map((_, i) => <div key={i} className="w-full h-px bg-[var(--color-surface-light)]/30 border-t border-dashed border-[var(--color-text-muted)]/20" />)}
@@ -120,28 +157,21 @@ export function IndustrySplit() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-20">
+        <div className="grid md:grid-cols-3 gap-6">
           {stats.map((stat, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
               className="bg-[var(--color-surface-dark)] rounded-2xl p-8 text-center border border-[var(--color-surface-light)] hover:border-[var(--color-primary)]/30 transition-colors"
             >
-              <div className={`text-4xl sm:text-5xl font-bold mb-3 ${index === 2 ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-primary)]'}`}>
-                {stat.value}
+              <div className={`text-6xl sm:text-7xl lg:text-8xl font-bold mb-3 ${index === 2 ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-primary)]'}`}>
+                <AnimatedNumber value={stat.value} />
               </div>
               <div className="text-[var(--color-text-secondary)]">{stat.label}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-
-        {/* Video Section - Below Stats */}
-        <div className="max-w-3xl mx-auto">
-          <VimeoEmbed 
-            videoId="1086710926" 
-            title="Upgrade your workflow with AI"
-            caption="See how AI tools like Cursor accelerate development workflows by 10x."
-            mode="ambient"
-          />
         </div>
       </Container>
     </section>

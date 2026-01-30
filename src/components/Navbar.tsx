@@ -1,0 +1,43 @@
+import { motion } from 'framer-motion'
+import { Button } from './ui/Button'
+
+export function Navbar() {
+  const scrollToPricing = () => {
+    const pricingSection = document.getElementById('pricing')
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  return (
+    <motion.nav
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      className="fixed top-0 left-0 right-0 z-50 bg-[var(--color-surface-dark)]/80 backdrop-blur-md border-b border-[var(--color-surface-light)]/50"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-12 sm:h-14">
+          {/* Logo/Brand */}
+          <div className="flex items-center">
+            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-[#FF6600] via-[#FF9933] to-[#FF6600] bg-clip-text text-transparent">
+              Nueve Design Engineer
+            </span>
+          </div>
+
+          {/* CTA Button */}
+          <Button
+            type="button"
+            onClick={scrollToPricing}
+            size="sm"
+            className="bg-[#FD7E35] hover:bg-[#E0601A] text-white border-none rounded-full px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold shadow-[0_4px_14px_0_rgba(253,126,53,0.39)] hover:shadow-[0_6px_20px_rgba(253,126,53,0.23)] hover:-translate-y-0.5 transition-all"
+            data-event="cta_click"
+            data-cta-type="start"
+            data-cta-placement="nav"
+          >
+            Start for $27
+          </Button>
+        </div>
+      </div>
+    </motion.nav>
+  )
+}

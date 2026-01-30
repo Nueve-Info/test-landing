@@ -1,4 +1,3 @@
-import { Container } from '../ui/Container'
 import accentLogo from '../../assets/accent.png'
 import aghLogo from '../../assets/agh.png'
 import allegLogo from '../../assets/alleg.png'

@@ -1,5 +1,6 @@
 import { Container } from '../ui/Container'
 import { BackgroundGlow } from '../ui/BackgroundGlow'
+import { VimeoEmbed } from '../ui/VimeoEmbed'
 
 const transformations = [
   { before: 'Figma mockups', after: 'Live coded websites' },
@@ -19,6 +20,16 @@ export function Transformation() {
             From Designer to{' '}
             <span className="gradient-text">Design Engineer</span>
           </h2>
+        </div>
+
+        {/* Video Section - Below Heading */}
+        <div className="max-w-3xl mx-auto mb-16">
+          <VimeoEmbed 
+            videoId="1086710926" 
+            title="Upgrade your workflow with AI"
+            caption="See how AI tools like Cursor accelerate development workflows by 10x."
+            mode="ambient"
+          />
         </div>
 
         {/* Transformation grid */}

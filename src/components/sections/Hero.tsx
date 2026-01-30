@@ -3,13 +3,10 @@ import { motion } from 'framer-motion'
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
 import accentLogo from '../../assets/accent.png'
-import aghLogo from '../../assets/agh.png'
-import allegLogo from '../../assets/alleg.png'
 import behaLogo from '../../assets/beha.png'
 import comarLogo from '../../assets/comar.png'
 import matteLogo from '../../assets/matte.png'
 import mediuLogo from '../../assets/mediu.png'
-import pzuLogo from '../../assets/pzu.png'
 import samsungLogo from '../../assets/samsung.png'
 import profilePic1 from '../../assets/pics/photo-1438761681033-6461ffad8d80.jpeg'
 import profilePic2 from '../../assets/pics/photo-1494790108377-be9c29b29330.jpeg'
@@ -17,13 +14,10 @@ import profilePic3 from '../../assets/pics/photo-1507003211169-0a1dd7228f2d.jpeg
 
 const logos = [
   { src: accentLogo, alt: 'Accent' },
-  { src: aghLogo, alt: 'AGH' },
-  { src: allegLogo, alt: 'Allegro' },
   { src: behaLogo, alt: 'Beha' },
   { src: comarLogo, alt: 'Comar' },
   { src: matteLogo, alt: 'Matte' },
   { src: mediuLogo, alt: 'Medium' },
-  { src: pzuLogo, alt: 'PZU' },
   { src: samsungLogo, alt: 'Samsung' },
 ]
 
@@ -43,7 +37,7 @@ export function Hero() {
     }
   }, [displayedText, fullText])
   return (
-    <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-[var(--color-surface-dark)]">
+    <section className="relative min-h-screen flex flex-col justify-center pt-32 sm:pt-36 pb-32 overflow-hidden bg-[var(--color-surface-dark)]">
       
       {/* Background Enhancements */}
       {/* 1. Subtle Texture (Dots) */}
@@ -69,7 +63,7 @@ export function Hero() {
       />
 
       <Container className="relative z-10">
-        <div className="grid lg:grid-cols-12 gap-4 lg:gap-12 items-end mb-20">
+        <div className="grid lg:grid-cols-12 gap-4 lg:gap-12 items-end mb-12 lg:mb-12">
           
           {/* Left Column: Badge + Title */}
           <div className="lg:col-span-7">
@@ -96,7 +90,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="mt-6 text-xl text-[var(--color-text-secondary)] font-medium"
+              className="mt-8 text-xl text-[var(--color-text-secondary)] font-medium"
             >
               <span className="lg:hidden">Create Live Portfolio in 24 Hours Using AI</span>
               <span className="hidden lg:inline">Build Production-Ready Portfolio in 24 Hours Using AI</span>
@@ -109,7 +103,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-lg text-[var(--color-text-secondary)] mb-6 leading-relaxed max-w-md"
+              className="text-lg text-[var(--color-text-secondary)] mb-8 leading-relaxed max-w-md"
             >
               <span className="block lg:hidden">Start building real products. Bridge the gap between Figma and production.</span>
               <span className="hidden lg:block">Stop just designing static pixels. Start building real products. Master AI-assisted coding and bridge the gap between Figma and production.</span>
@@ -120,7 +114,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35 }}
-              className="flex items-center gap-3 mb-8"
+              className="flex items-center gap-3 mb-10"
             >
               <div className="flex -space-x-3.5">
                 {[profilePic1, profilePic2, profilePic3].map((pic, i) => (
@@ -143,7 +137,14 @@ export function Hero() {
               transition={{ delay: 0.4 }}
               className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
             >
-              <Button size="lg" className="bg-[#FD7E35] hover:bg-[#E0601A] text-white border-none rounded-full px-8 font-semibold text-lg shadow-[0_4px_14px_0_rgba(253,126,53,0.39)] hover:shadow-[0_6px_20px_rgba(253,126,53,0.23)] hover:-translate-y-1 transition-all">
+              <Button 
+                type="button"
+                size="lg" 
+                className="bg-[#FD7E35] hover:bg-[#E0601A] text-white border-none rounded-full px-8 font-semibold text-lg shadow-[0_4px_14px_0_rgba(253,126,53,0.39)] hover:shadow-[0_6px_20px_rgba(253,126,53,0.23)] hover:-translate-y-1 transition-all"
+                data-event="cta_click"
+                data-cta-type="start"
+                data-cta-placement="hero"
+              >
                 Start for just $27
               </Button>
               
@@ -163,7 +164,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.8 }}
-        className="relative w-full flex justify-center px-4 sm:px-6 lg:px-8"
+        className="relative w-full flex justify-center px-4 sm:px-6 lg:px-8 mt-6 lg:mt-8"
       >
         <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl relative z-10 text-gray-900 max-w-4xl w-full">
           {/* Header/Greeting */}
@@ -208,7 +209,7 @@ export function Hero() {
       </motion.div>
 
       {/* Logo Marquee - Below Chat Card */}
-      <div className="mt-20 overflow-hidden relative z-10 px-4 sm:px-6 lg:px-8">
+      <div className="mt-24 overflow-hidden relative z-10 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-16 animate-logo-scroll">
           {/* Duplicate set for seamless infinite loop */}
           {[...logos, ...logos, ...logos].map((logo, index) => (

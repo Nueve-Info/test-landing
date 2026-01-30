@@ -10,6 +10,8 @@ import { SocialProof } from '../components/sections/SocialProof'
 import { Pricing } from '../components/sections/Pricing'
 import { FAQ } from '../components/sections/FAQ'
 import { FinalCTA } from '../components/sections/FinalCTA'
+import { Footer } from '../components/sections/Footer'
+import { Navbar } from '../components/Navbar'
 
 const BentoCard = ({ children, className = '', delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => (
   <motion.div
@@ -25,7 +27,8 @@ const BentoCard = ({ children, className = '', delay = 0 }: { children: React.Re
 export function PortfolioVariant() {
   return (
     <div className="theme-portfolio min-h-screen bg-[var(--color-surface-dark)] text-[var(--color-text-primary)]">
-       <Container>
+      <Navbar />
+       <Container className="pt-12 sm:pt-14">
          {/* Navigation Placeholder */}
          <div className="flex items-center justify-between py-8 mb-8">
            <div className="text-2xl font-semibold tracking-tight">DesignEngineer.io</div>
@@ -97,6 +100,7 @@ export function PortfolioVariant() {
             <FAQ />
             <FinalCTA />
          </div>
+         <Footer />
        </Container>
     </div>
   )

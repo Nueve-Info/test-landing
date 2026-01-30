@@ -59,6 +59,17 @@ export function PortfolioSystem() {
           </p>
         </div>
 
+        {/* Video Section - Below Headline */}
+        <div className="max-w-3xl mx-auto mb-16">
+          <VimeoEmbed 
+            videoId="1140418453"
+            hash="d47ea2acf5"
+            title="Portfolio Structure Preview"
+            caption="Recruiters spend ~20 seconds on your portfolio. We help you use them well."
+            mode="ambient"
+          />
+        </div>
+
         {/* Steps flowchart */}
         <div className="grid md:grid-cols-4 gap-4 max-w-5xl mx-auto">
           {steps.map((step, index) => (
@@ -84,9 +95,8 @@ export function PortfolioSystem() {
           ))}
         </div>
 
-        {/* Code aesthetic element + Video */}
-        <div className="mt-16 grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
-          {/* Code Window */}
+        {/* Code aesthetic element */}
+        <div className="mt-16 max-w-2xl mx-auto">
           <div className="bg-[var(--color-surface-dark)] rounded-xl border border-[var(--color-surface-light)] overflow-hidden shadow-2xl">
             {/* Window Header */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--color-surface-light)] bg-[var(--color-surface)]/50">
@@ -143,17 +153,6 @@ export function PortfolioSystem() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Video Panel */}
-          <div>
-            <VimeoEmbed 
-              videoId="1140418453"
-              hash="d47ea2acf5"
-              title="Portfolio Structure Preview"
-              caption="Recruiters spend ~20 seconds on your portfolio. We help you use them well."
-              mode="ambient"
-            />
           </div>
         </div>
       </Container>

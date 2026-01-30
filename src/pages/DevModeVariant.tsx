@@ -10,16 +10,19 @@ import { SocialProof } from '../components/sections/SocialProof'
 import { Pricing } from '../components/sections/Pricing'
 import { FAQ } from '../components/sections/FAQ'
 import { FinalCTA } from '../components/sections/FinalCTA'
+import { Footer } from '../components/sections/Footer'
+import { Navbar } from '../components/Navbar'
 
 export function DevModeVariant() {
   return (
     <div className="theme-dev-mode min-h-screen bg-[var(--color-surface-dark)] text-[var(--color-text-primary)] font-mono selection:bg-[var(--color-primary)] selection:text-black">
+      <Navbar />
       {/* Matrix/Grid Background */}
       <div className="fixed inset-0 pointer-events-none opacity-10" 
            style={{ backgroundImage: 'linear-gradient(0deg, transparent 24%, var(--color-surface-light) 25%, var(--color-surface-light) 26%, transparent 27%, transparent 74%, var(--color-surface-light) 75%, var(--color-surface-light) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, var(--color-surface-light) 25%, var(--color-surface-light) 26%, transparent 27%, transparent 74%, var(--color-surface-light) 75%, var(--color-surface-light) 76%, transparent 77%, transparent)', backgroundSize: '50px 50px' }} 
       />
 
-      <Container className="relative z-10">
+      <Container className="relative z-10 pt-12 sm:pt-14">
         {/* Nav-ish Header */}
         <header className="py-6 flex justify-between items-center border-b border-[var(--color-surface-light)] mb-10">
           <div className="text-[var(--color-primary)] font-bold tracking-tighter text-xl">
@@ -120,6 +123,7 @@ export function DevModeVariant() {
       <Pricing />
       <FAQ />
       <FinalCTA />
+      <Footer />
     </div>
   )
 }
