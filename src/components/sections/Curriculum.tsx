@@ -1,4 +1,6 @@
 import { Container } from '../ui/Container'
+import { BackgroundGlow } from '../ui/BackgroundGlow'
+import { VimeoEmbed } from '../ui/VimeoEmbed'
 
 const modules = [
   { number: '01', title: 'Design Engineer Mindset & Market Positioning', description: 'Understand the new landscape and position yourself for success' },
@@ -12,8 +14,10 @@ const modules = [
 
 export function Curriculum() {
   return (
-    <section className="py-24 code-bg">
-      <Container>
+    <section className="relative py-24 bg-[var(--color-surface-dark)] overflow-hidden">
+      <BackgroundGlow variant="subtle" />
+      
+      <Container className="relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Course{' '}
@@ -21,15 +25,27 @@ export function Curriculum() {
           </h2>
         </div>
 
+        {/* Lesson Preview Video */}
+        <div className="max-w-3xl mx-auto mb-16">
+          <VimeoEmbed 
+            videoId="1152835057"
+            title="Portfolio Review Session"
+            caption="Watch a real portfolio review session with our mentors."
+            mode="ambient"
+          />
+        </div>
+
         <div className="max-w-3xl mx-auto space-y-4">
           {modules.map((module, index) => (
             <div
               key={index}
-              className="group bg-[var(--color-surface)] rounded-xl p-6 border border-[var(--color-surface-light)] hover:border-[var(--color-primary)]/30 transition-all"
+              className="group relative bg-[var(--color-surface)] rounded-xl p-6 border border-[var(--color-surface-light)] hover:border-[var(--color-primary)]/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(253,126,53,0.1)]"
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-accent)]/20 flex items-center justify-center font-mono text-[var(--color-primary)] font-medium">
-                  {module.number}
+                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[var(--color-surface-dark)] border border-[var(--color-surface-light)] group-hover:border-[var(--color-primary)]/30 flex items-center justify-center font-mono text-xl font-bold transition-colors">
+                   <span className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] bg-clip-text text-transparent">
+                    {module.number}
+                   </span>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-primary-light)] transition-colors">
@@ -42,18 +58,19 @@ export function Curriculum() {
           ))}
 
           {/* Bonus module */}
-          <div className="bg-gradient-to-r from-[var(--color-primary)]/20 to-[var(--color-accent)]/20 rounded-xl p-6 border border-[var(--color-primary)]/30">
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center">
+          <div className="relative overflow-hidden bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-accent)]/10 rounded-xl p-6 border border-[var(--color-primary)]/30 transition-transform hover:scale-[1.01]">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--color-primary)]/5 to-transparent translate-x-[-100%] animate-[shimmer_3s_infinite]" />
+            <div className="flex items-start gap-4 relative z-10">
+              <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/20">
                 <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                 </svg>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs uppercase tracking-wider text-[var(--color-accent)] font-medium">Bonus</span>
+                  <span className="text-xs uppercase tracking-wider text-[var(--color-primary)] font-bold bg-[var(--color-primary)]/10 px-2 py-0.5 rounded-full border border-[var(--color-primary)]/20">Bonus</span>
                 </div>
-                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mt-1">
                   The Figma Bottleneck Thesis
                 </h3>
                 <p className="text-[var(--color-text-secondary)] mt-1">Position yourself as the solution to design bottlenecks</p>

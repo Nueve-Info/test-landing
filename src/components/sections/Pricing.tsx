@@ -1,5 +1,6 @@
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
+import { BackgroundGlow } from '../ui/BackgroundGlow'
 
 const offerItems = [
   { name: 'NueveFolio 2.0 Complete Course', value: '$197' },
@@ -10,8 +11,10 @@ const offerItems = [
 
 export function Pricing() {
   return (
-    <section className="py-24 bg-[var(--color-surface)]">
-      <Container>
+    <section className="relative py-24 bg-[var(--color-surface)] overflow-hidden">
+      <BackgroundGlow variant="intense" />
+      
+      <Container className="relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Become a Design Engineer for{' '}
@@ -21,13 +24,17 @@ export function Pricing() {
 
         <div className="max-w-2xl mx-auto">
           {/* Pricing card */}
-          <div className="bg-gradient-to-br from-[var(--color-surface-dark)] to-[var(--color-surface)] rounded-3xl p-8 sm:p-10 border border-[var(--color-primary)]/30 glow-primary">
+          <div className="animate-float relative bg-gradient-to-br from-[var(--color-surface-dark)] to-[var(--color-surface)] rounded-3xl p-8 sm:p-10 border border-[var(--color-primary)]/30 glow-primary transition-all duration-300 hover:shadow-[0_0_60px_rgba(253,126,53,0.2)]">
+            
+            {/* Glossy overlay effect */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+
             {/* Offer stack */}
-            <div className="space-y-4 mb-8">
+            <div className="relative space-y-4 mb-8">
               {offerItems.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-4 bg-[var(--color-surface-dark)] rounded-xl border border-[var(--color-surface-light)]"
+                  className="flex items-center justify-between p-4 bg-[var(--color-surface-dark)]/80 backdrop-blur-sm rounded-xl border border-[var(--color-surface-light)] hover:border-[var(--color-primary)]/30 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,22 +48,23 @@ export function Pricing() {
             </div>
 
             {/* Total value */}
-            <div className="flex items-center justify-between p-4 bg-[var(--color-primary)]/10 rounded-xl border border-[var(--color-primary)]/30 mb-8">
-              <span className="text-[var(--color-text-secondary)]">Total Value:</span>
-              <span className="text-xl font-bold text-[var(--color-text-muted)] line-through">$368</span>
+            <div className="relative flex items-center justify-between p-4 bg-[var(--color-primary)]/10 rounded-xl border border-[var(--color-primary)]/30 mb-8 overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--color-primary)]/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+              <span className="text-[var(--color-text-secondary)] font-medium">Total Value:</span>
+              <span className="text-xl font-bold text-[var(--color-text-muted)] line-through decoration-[var(--color-primary)]/50 decoration-2">$368</span>
             </div>
 
             {/* Price */}
             <div className="text-center mb-8">
-              <div className="text-[var(--color-text-muted)] text-sm uppercase tracking-wider mb-2">Your Price Today</div>
+              <div className="text-[var(--color-text-muted)] text-sm uppercase tracking-wider mb-2 font-semibold">Your Price Today</div>
               <div className="flex items-center justify-center gap-3">
-                <span className="text-5xl sm:text-6xl font-bold text-[var(--color-text-primary)]">$27</span>
-                <span className="bg-[var(--color-cta)] text-white text-sm font-semibold px-3 py-1 rounded-full">93% OFF</span>
+                <span className="text-5xl sm:text-6xl font-bold bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-sm">$27</span>
+                <span className="bg-[var(--color-cta)] text-white text-sm font-bold px-3 py-1 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.4)] animate-pulse">93% OFF</span>
               </div>
             </div>
 
             {/* CTA */}
-            <Button variant="cta" size="lg" className="w-full mb-6">
+            <Button variant="cta" size="lg" className="w-full mb-6 text-lg font-bold shadow-[0_4px_20px_rgba(239,68,68,0.4)] hover:shadow-[0_6px_25px_rgba(239,68,68,0.6)] hover:scale-[1.02] transition-all duration-300">
               Start Your Transformation ($27)
             </Button>
 
@@ -65,12 +73,12 @@ export function Pricing() {
               <svg className="w-5 h-5 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
-              <span className="text-sm">60-day money-back guarantee</span>
+              <span className="text-sm">30-day money-back guarantee</span>
             </div>
 
             {/* Urgency */}
             <div className="text-center p-4 bg-[var(--color-cta)]/10 rounded-xl border border-[var(--color-cta)]/30">
-              <div className="text-[var(--color-cta)] font-semibold">
+              <div className="text-[var(--color-cta)] font-bold">
                 Early adopter pricing ends January 31st
               </div>
               <div className="text-sm text-[var(--color-text-muted)]">

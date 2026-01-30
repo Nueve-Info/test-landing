@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Container } from '../ui/Container'
+import { BackgroundGlow } from '../ui/BackgroundGlow'
 
 const faqs = [
   {
@@ -28,8 +30,10 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-24 code-bg">
-      <Container>
+    <section className="relative py-24 bg-[var(--color-surface)] overflow-hidden">
+      <BackgroundGlow variant="subtle" />
+      
+      <Container className="relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Frequently Asked{' '}
@@ -38,32 +42,58 @@ export function FAQ() {
         </div>
 
         <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-[var(--color-surface)] rounded-xl border border-[var(--color-surface-light)] overflow-hidden"
-            >
-              <button
-                className="w-full flex items-center justify-between p-6 text-left hover:bg-[var(--color-surface-light)]/30 transition-colors"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index
+            return (
+              <div
+                key={index}
+                className={`group bg-[var(--color-surface)] rounded-xl border transition-all duration-300 overflow-hidden ${
+                  isOpen 
+                    ? 'border-[var(--color-primary)]/50 shadow-[0_0_20px_rgba(253,126,53,0.1)]' 
+                    : 'border-[var(--color-surface-light)] hover:border-[var(--color-primary)]/30'
+                }`}
               >
-                <span className="text-lg font-medium text-[var(--color-text-primary)] pr-4">{faq.question}</span>
-                <svg
-                  className={`w-5 h-5 text-[var(--color-primary)] transition-transform ${openIndex === index ? 'rotate-180' : ''}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                <button
+                  className="w-full flex items-center justify-between p-6 text-left transition-colors"
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {openIndex === index && (
-                <div className="px-6 pb-6">
-                  <p className="text-[var(--color-text-secondary)]">{faq.answer}</p>
-                </div>
-              )}
-            </div>
-          ))}
+                  <span className={`text-lg font-medium pr-4 transition-colors ${
+                    isOpen ? 'text-[var(--color-primary-light)]' : 'text-[var(--color-text-primary)]'
+                  }`}>
+                    {faq.question}
+                  </span>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    isOpen ? 'bg-[var(--color-primary)] rotate-180' : 'bg-[var(--color-surface-light)] group-hover:bg-[var(--color-surface-elevated)]'
+                  }`}>
+                    <svg
+                      className={`w-5 h-5 transition-colors ${isOpen ? 'text-white' : 'text-[var(--color-text-muted)]'}`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    >
+                      <div className="px-6 pb-6 pt-0">
+                        <p className="text-[var(--color-text-secondary)] leading-relaxed border-t border-[var(--color-surface-light)] pt-4">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )
+          })}
         </div>
       </Container>
     </section>

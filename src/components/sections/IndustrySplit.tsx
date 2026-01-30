@@ -1,5 +1,6 @@
 import { Container } from '../ui/Container'
 import { motion } from 'framer-motion'
+import { VimeoEmbed } from '../ui/VimeoEmbed'
 
 const stats = [
   { value: '66%', label: 'of designers fear AI will replace them' },
@@ -23,7 +24,7 @@ export function IndustrySplit() {
         </div>
 
         {/* Graph Visual */}
-        <div className="relative max-w-3xl mx-auto mb-20 h-72 sm:h-96 bg-[var(--color-surface-dark)] rounded-2xl border border-[var(--color-surface-light)] px-8 pt-8 pb-8 overflow-hidden shadow-2xl">
+        <div className="relative max-w-3xl mx-auto mb-12 h-72 sm:h-96 bg-[var(--color-surface-dark)] rounded-2xl border border-[var(--color-surface-light)] px-8 pt-8 pb-8 overflow-hidden shadow-2xl">
           {/* Grid lines */}
           <div className="absolute inset-0 px-8 pt-8 pb-12 flex flex-col justify-between pointer-events-none" style={{ paddingTop: '48px' }}>
              {[...Array(5)].map((_, i) => <div key={i} className="w-full h-px bg-[var(--color-surface-light)]/30 border-t border-dashed border-[var(--color-text-muted)]/20" />)}
@@ -119,7 +120,7 @@ export function IndustrySplit() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 mb-20">
           {stats.map((stat, index) => (
             <div
               key={index}
@@ -131,6 +132,16 @@ export function IndustrySplit() {
               <div className="text-[var(--color-text-secondary)]">{stat.label}</div>
             </div>
           ))}
+        </div>
+
+        {/* Video Section - Below Stats */}
+        <div className="max-w-3xl mx-auto">
+          <VimeoEmbed 
+            videoId="1086710926" 
+            title="Upgrade your workflow with AI"
+            caption="See how AI tools like Cursor accelerate development workflows by 10x."
+            mode="ambient"
+          />
         </div>
       </Container>
     </section>
