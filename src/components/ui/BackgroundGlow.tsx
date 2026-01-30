@@ -33,7 +33,7 @@ export const BackgroundGlow = memo(function BackgroundGlow({
       
       {/* 3. Secondary Ambient Glows */}
       <div 
-        className={`absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[120px] transition-opacity duration-1000 ${
+        className={`absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--color-primary)]/5 rounded-full blur-[120px] transition-opacity duration-1000 ${
           variant === 'subtle' ? 'opacity-20' : 'opacity-100'
         }`}
       />

@@ -28,7 +28,7 @@ export function ThankYou() {
             rotate: [360, 180, 0]
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-20 -right-20 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]"
+          className="absolute -bottom-20 -right-20 w-[500px] h-[500px] bg-[var(--color-primary)]/5 rounded-full blur-[120px]"
         />
       </div>
 
