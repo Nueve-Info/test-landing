@@ -1,8 +1,18 @@
 import { Container } from '../components/ui/Container'
 import { BackgroundGlow } from '../components/ui/BackgroundGlow'
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 
 export function ThankYou() {
+  useEffect(() => {
+    if (window.fbq) {
+      window.fbq('track', 'Purchase', {
+        currency: 'USD',
+        value: 97.00 // Default value for early access
+      });
+    }
+  }, []);
+
   // Floating particles for delight
   const particles = Array.from({ length: 12 })
 
