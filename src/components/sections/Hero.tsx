@@ -8,9 +8,8 @@ import comarLogo from '../../assets/comar.png'
 import matteLogo from '../../assets/matte.png'
 import mediuLogo from '../../assets/mediu.png'
 import samsungLogo from '../../assets/samsung.png'
-import profilePic1 from '../../assets/pics/photo-1438761681033-6461ffad8d80.jpeg'
-import profilePic2 from '../../assets/pics/photo-1494790108377-be9c29b29330.jpeg'
-import profilePic3 from '../../assets/pics/photo-1507003211169-0a1dd7228f2d.jpeg'
+import moniqueImage from '../../assets/Monique.png'
+import krystianImage from '../../assets/krystian.png'
 
 const logos = [
   { src: accentLogo, alt: 'Accent' },
@@ -124,7 +123,7 @@ export function Hero() {
               className="flex items-center gap-3 mb-10"
             >
               <div className="flex -space-x-3.5">
-                {[profilePic1, profilePic2, profilePic3].map((pic, i) => (
+                {[moniqueImage, krystianImage, moniqueImage].map((pic, i) => (
                   <img
                     key={i}
                     src={pic}

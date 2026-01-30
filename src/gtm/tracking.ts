@@ -81,9 +81,9 @@ if (!window.__gtmTrackingInstalled) {
       page_title: document.title
     })
 
-    // Meta Pixel: Track Purchase event
+    // Meta Pixel: Track InitiateCheckout event
     if (window.fbq && price !== null) {
-      window.fbq('track', 'Purchase', {
+      window.fbq('track', 'InitiateCheckout', {
         value: price,
         currency: currency,
         content_name: ctaLabel,
