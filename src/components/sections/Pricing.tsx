@@ -69,7 +69,7 @@ export function Pricing() {
               variant="cta" 
               size="lg" 
               className="js-select-plan w-full mb-6 text-lg font-bold bg-emerald-500 hover:bg-emerald-600 shadow-[0_4px_20px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_25px_rgba(16,185,129,0.6)] hover:scale-[1.02] transition-all duration-300"
-              href="https://buy.stripe.com/3cI28qeA31KP5wl0COgA81A"
+              href="https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C"
               target="_blank"
               rel="noopener noreferrer"
               data-event="select_plan"
@@ -77,7 +77,7 @@ export function Pricing() {
               data-billing="one_time"
               data-price="27"
               data-currency="USD"
-              data-stripe-url="https://buy.stripe.com/3cI28qeA31KP5wl0COgA81A"
+              data-stripe-url="https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C"
               data-cta-placement="pricing"
             >
               Start Your Transformation ($27)
