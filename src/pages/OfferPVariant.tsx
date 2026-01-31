@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react'
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion'
+import { useState } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { Container } from '../components/ui/Container'
 import { Button } from '../components/ui/Button'
 import { Navbar } from '../components/Navbar'
@@ -11,7 +11,7 @@ const offer = offers.p
 // Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
 }
 
 const staggerContainer = {
