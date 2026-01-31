@@ -1,7 +1,4 @@
 import { Container } from '../ui/Container'
-import profilePic1 from '../../assets/pics/photo-1438761681033-6461ffad8d80.jpeg'
-import profilePic2 from '../../assets/pics/photo-1494790108377-be9c29b29330.jpeg'
-import profilePic3 from '../../assets/pics/photo-1507003211169-0a1dd7228f2d.jpeg'
 import moniqueImage from '../../assets/Monique.png'
 import krystianImage from '../../assets/krystian.png'
 import alumniPhoto1 from '../../assets/pics/photo-1507003211169-0a1dd7228f2d.jpeg'

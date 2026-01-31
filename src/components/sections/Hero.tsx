@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
@@ -22,27 +21,12 @@ const logos = [
 ]
 
 export function Hero() {
-  const fullText = "I'm a designer with few years of experience. I feel stuck in my current role and not really sure what to do. I took up some courses this past year and despite I like it, I see that"
-  const [displayedText, setDisplayedText] = useState('')
-  const [isTyping, setIsTyping] = useState(true)
-
   const scrollToPricing = () => {
     const pricingSection = document.getElementById('pricing')
     if (pricingSection) {
       pricingSection.scrollIntoView({ behavior: 'smooth' })
     }
   }
-
-  useEffect(() => {
-    if (displayedText.length < fullText.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(fullText.slice(0, displayedText.length + 1))
-      }, 30) // Typing speed: 30ms per character
-      return () => clearTimeout(timeout)
-    } else {
-      setIsTyping(false)
-    }
-  }, [displayedText, fullText])
   return (
     <section className="relative min-h-screen flex flex-col justify-center pt-32 sm:pt-36 pb-32 overflow-hidden bg-[var(--color-surface-dark)]">
       

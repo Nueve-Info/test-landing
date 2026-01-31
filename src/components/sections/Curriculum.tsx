@@ -1,6 +1,5 @@
 import { Container } from '../ui/Container'
 import { BackgroundGlow } from '../ui/BackgroundGlow'
-import { VimeoEmbed } from '../ui/VimeoEmbed'
 
 const modules = [
   { number: '01', title: 'Design Engineer Mindset & Market Positioning', description: 'Understand the new landscape and position yourself for success' },
