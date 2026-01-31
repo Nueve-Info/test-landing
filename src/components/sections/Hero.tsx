@@ -10,6 +10,7 @@ import mediuLogo from '../../assets/mediu.png'
 import samsungLogo from '../../assets/samsung.png'
 import moniqueImage from '../../assets/Monique.png'
 import krystianImage from '../../assets/krystian.png'
+import alumniPhoto1 from '../../assets/pics/photo-1507003211169-0a1dd7228f2d.jpeg'
 
 const logos = [
   { src: accentLogo, alt: 'Accent' },
@@ -123,7 +124,7 @@ export function Hero() {
               className="flex items-center gap-3 mb-10"
             >
               <div className="flex -space-x-3.5">
-                {[moniqueImage, krystianImage, moniqueImage].map((pic, i) => (
+                {[alumniPhoto1, krystianImage, moniqueImage].map((pic, i) => (
                   <img
                     key={i}
                     src={pic}
@@ -166,47 +167,23 @@ export function Hero() {
         </div>
       </Container>
 
-      {/* Chat Interface Card - Outside Container for proper centering */}
+      {/* Video Interface Card - Replaced Chat Card */}
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.8 }}
         className="relative w-full flex justify-center px-4 sm:px-6 lg:px-8 mt-6 lg:mt-8"
       >
-        <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl relative z-10 text-gray-900 max-w-4xl w-full">
-          {/* Header/Greeting */}
-          <div className="flex justify-between items-start mb-8">
-            <h3 className="text-3xl font-semibold text-gray-900">Hi Tom!</h3>
-            <div className="bg-black text-white px-4 py-1.5 rounded-full text-sm font-medium">
-              Unmute
-            </div>
-          </div>
-
-          {/* Chat Content */}
-          <div className="space-y-2 mb-12">
-            <p className="text-xl md:text-2xl text-gray-700 leading-relaxed font-normal">
-              {displayedText}
-              <span className={`inline-block w-0.5 h-6 bg-black align-middle ml-1 ${isTyping ? 'animate-pulse' : ''}`}></span>
-            </p>
-          </div>
-
-          {/* Input Area */}
-          <div className="flex items-center justify-between mt-auto pt-4 border-t border-transparent">
-            <button className="text-gray-400 hover:text-gray-600 transition-colors p-2 -ml-2">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-            </button>
-            
-            <button className="bg-black text-white rounded-full p-3 hover:bg-gray-800 transition-colors">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                <line x1="12" y1="19" x2="12" y2="23"></line>
-                <line x1="8" y1="23" x2="16" y2="23"></line>
-              </svg>
-            </button>
+        <div className="bg-white rounded-[2rem] p-4 md:p-6 shadow-2xl relative z-10 text-gray-900 max-w-4xl w-full overflow-hidden">
+          <div style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
+            <iframe 
+              src="https://player.vimeo.com/video/1160304896?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1" 
+              frameBorder="0" 
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+              referrerPolicy="strict-origin-when-cross-origin" 
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '1rem' }} 
+              title="Introduction"
+            ></iframe>
           </div>
         </div>
 

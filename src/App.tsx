@@ -5,6 +5,12 @@ import { DevModeVariant } from './pages/DevModeVariant'
 import { PortfolioVariant } from './pages/PortfolioVariant'
 import { PrivacyPolicy } from './pages/PrivacyPolicy'
 import { ThankYou } from './pages/ThankYou'
+import { OfferP } from './pages/OfferP'
+import { OfferB } from './pages/OfferB'
+import { OfferL } from './pages/OfferL'
+import { OfferA } from './pages/OfferA'
+import { OfferJ } from './pages/OfferJ'
+import { OfferI } from './pages/OfferI'
 
 function App() {
   return (
@@ -16,6 +22,13 @@ function App() {
         <Route path="/portfolio" element={<PortfolioVariant />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        {/* Offer landing pages */}
+        <Route path="/p" element={<OfferP />} />
+        <Route path="/b" element={<OfferB />} />
+        <Route path="/l" element={<OfferL />} />
+        <Route path="/a" element={<OfferA />} />
+        <Route path="/j" element={<OfferJ />} />
+        <Route path="/i" element={<OfferI />} />
       </Routes>
     </BrowserRouter>
   )

@@ -4,6 +4,7 @@ import profilePic2 from '../../assets/pics/photo-1494790108377-be9c29b29330.jpeg
 import profilePic3 from '../../assets/pics/photo-1507003211169-0a1dd7228f2d.jpeg'
 import moniqueImage from '../../assets/Monique.png'
 import krystianImage from '../../assets/krystian.png'
+import alumniPhoto1 from '../../assets/pics/photo-1507003211169-0a1dd7228f2d.jpeg'
 
 type Testimonial = {
   quote: string
@@ -103,7 +104,7 @@ export function SocialProof() {
         <div className="flex justify-center">
           <div className="flex items-center gap-3">
             <div className="flex -space-x-3.5">
-              {[profilePic1, profilePic2, profilePic3].map((pic, i) => (
+              {[alumniPhoto1, krystianImage, moniqueImage].map((pic, i) => (
                 <img
                   key={i}
                   src={pic}

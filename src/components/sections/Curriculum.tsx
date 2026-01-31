@@ -27,12 +27,16 @@ export function Curriculum() {
 
         {/* Lesson Preview Video */}
         <div className="max-w-3xl mx-auto mb-16">
-          <VimeoEmbed 
-            videoId="1152835057"
-            title="Portfolio Review Session"
-            caption="Watch a real portfolio review session with our mentors."
-            mode="ambient"
-          />
+          <div style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
+            <iframe 
+              src="https://player.vimeo.com/video/1160305162?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1" 
+              frameBorder="0" 
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+              referrerPolicy="strict-origin-when-cross-origin" 
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '1rem' }} 
+              title="Agenda"
+            ></iframe>
+          </div>
         </div>
 
         <div className="max-w-3xl mx-auto space-y-4">

@@ -2,6 +2,7 @@ import { Hero } from '../components/sections/Hero'
 import { IndustrySplit } from '../components/sections/IndustrySplit'
 import { Transformation } from '../components/sections/Transformation'
 import { PortfolioSystem } from '../components/sections/PortfolioSystem'
+import { Mentors } from '../components/sections/Mentors'
 import { Curriculum } from '../components/sections/Curriculum'
 import { WhoIsFor } from '../components/sections/WhoIsFor'
 import { SocialProof } from '../components/sections/SocialProof'
@@ -19,6 +20,7 @@ export function OriginalLanding() {
       <IndustrySplit />
       <Transformation />
       <PortfolioSystem />
+      <Mentors />
       <Curriculum />
       <WhoIsFor />
       <SocialProof />
