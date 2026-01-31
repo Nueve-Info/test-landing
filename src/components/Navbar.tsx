@@ -1,7 +1,12 @@
 import { motion } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 import { Button } from './ui/Button'
 
 export function Navbar() {
+  const location = useLocation()
+  const isOfferPage = ['/p', '/b', '/l', '/a', '/j', '/i'].includes(location.pathname)
+  const price = isOfferPage ? '$1' : '$27'
+
   const scrollToPricing = () => {
     const pricingSection = document.getElementById('pricing')
     if (pricingSection) {
@@ -34,7 +39,7 @@ export function Navbar() {
             data-cta-type="start"
             data-cta-placement="nav"
           >
-            Start for $27
+            Start for {price}
           </Button>
         </div>
       </div>

@@ -1,6 +1,5 @@
-import { OfferLanding } from './OfferLanding'
-import { offers } from '../config/offerConfig'
+import { OfferBVariant } from './OfferBVariant'
 
 export function OfferB() {
-  return <OfferLanding offer={offers.b} />
+  return <OfferBVariant />
 }
