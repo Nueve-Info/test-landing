@@ -1,6 +1,16 @@
+import { useState, useEffect } from 'react'
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
 import { BackgroundGlow } from '../ui/BackgroundGlow'
+
+declare global {
+  interface Window {
+    posthog?: {
+      getFeatureFlag: (flag: string) => string | boolean | undefined
+      onFeatureFlags: (callback: () => void) => void
+    }
+  }
+}
 
 const offerItems = [
   { name: 'NueveFolio 2.0 Complete Course', value: '$197' },
@@ -10,6 +20,27 @@ const offerItems = [
 ]
 
 export function Pricing() {
+  const defaultUrl = 'https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C'
+  const [checkoutUrl, setCheckoutUrl] = useState(defaultUrl)
+
+  useEffect(() => {
+    const checkFlag = () => {
+      if (window.posthog?.getFeatureFlag('Test-1') === 'test') {
+        setCheckoutUrl('/value')
+      } else {
+        setCheckoutUrl(defaultUrl)
+      }
+    }
+
+    // Check immediately in case flags are already loaded
+    checkFlag()
+
+    // Also listen for when flags are loaded
+    if (window.posthog?.onFeatureFlags) {
+      window.posthog.onFeatureFlags(checkFlag)
+    }
+  }, [])
+
   return (
     <section id="pricing" className="relative py-24 bg-[var(--color-surface)] overflow-hidden">
       <BackgroundGlow variant="intense" />
@@ -69,9 +100,9 @@ export function Pricing() {
               variant="cta" 
               size="lg" 
               className="js-select-plan w-full mb-6 text-lg font-bold bg-emerald-500 hover:bg-emerald-600 shadow-[0_4px_20px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_25px_rgba(16,185,129,0.6)] hover:scale-[1.02] transition-all duration-300"
-              href="https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={checkoutUrl}
+              target={checkoutUrl.startsWith('/') ? undefined : '_blank'}
+              rel={checkoutUrl.startsWith('/') ? undefined : 'noopener noreferrer'}
               data-event="select_plan"
               data-plan-type="early_adopter"
               data-billing="one_time"

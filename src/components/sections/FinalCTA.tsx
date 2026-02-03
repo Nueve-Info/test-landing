@@ -1,7 +1,38 @@
+import { useState, useEffect } from 'react'
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
 
+declare global {
+  interface Window {
+    posthog?: {
+      getFeatureFlag: (flag: string) => string | boolean | undefined
+      onFeatureFlags: (callback: () => void) => void
+    }
+  }
+}
+
 export function FinalCTA() {
+  const defaultUrl = 'https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C'
+  const [checkoutUrl, setCheckoutUrl] = useState(defaultUrl)
+
+  useEffect(() => {
+    const checkFlag = () => {
+      if (window.posthog?.getFeatureFlag('Test-1') === 'test') {
+        setCheckoutUrl('/value')
+      } else {
+        setCheckoutUrl(defaultUrl)
+      }
+    }
+
+    // Check immediately in case flags are already loaded
+    checkFlag()
+
+    // Also listen for when flags are loaded
+    if (window.posthog?.onFeatureFlags) {
+      window.posthog.onFeatureFlags(checkFlag)
+    }
+  }, [])
+
   return (
     <section className="py-24 bg-[var(--color-surface)] relative overflow-hidden">
       {/* Background gradient */}
@@ -24,9 +55,9 @@ export function FinalCTA() {
             variant="cta" 
             size="lg" 
             className="js-select-plan mb-8"
-            href="https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={checkoutUrl}
+            target={checkoutUrl.startsWith('/') ? undefined : '_blank'}
+            rel={checkoutUrl.startsWith('/') ? undefined : 'noopener noreferrer'}
             data-event="select_plan"
             data-plan-type="early_adopter"
             data-billing="one_time"
