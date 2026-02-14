@@ -11,12 +11,15 @@ import { FAQ } from '../components/sections/FAQ'
 import { FinalCTA } from '../components/sections/FinalCTA'
 import { Footer } from '../components/sections/Footer'
 import { Navbar } from '../components/Navbar'
+import { usePriceTest } from '../experiments/priceTest'
 
 export function OriginalLanding() {
+  const { price, priceLabel, checkoutHref } = usePriceTest()
+
   return (
     <main className="min-h-screen">
-      <Navbar />
-      <Hero />
+      <Navbar priceOverride={priceLabel} />
+      <Hero priceLabel={priceLabel} />
       <IndustrySplit />
       <Transformation />
       <PortfolioSystem />
@@ -24,9 +27,9 @@ export function OriginalLanding() {
       <Curriculum />
       <WhoIsFor />
       <SocialProof />
-      <Pricing />
+      <Pricing price={price} checkoutHref={checkoutHref} />
       <FAQ />
-      <FinalCTA />
+      <FinalCTA price={price} checkoutHref={checkoutHref} />
       <Footer />
     </main>
   )

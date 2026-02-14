@@ -2,10 +2,14 @@ import { motion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { Button } from './ui/Button'
 
-export function Navbar() {
+interface NavbarProps {
+  priceOverride?: string
+}
+
+export function Navbar({ priceOverride }: NavbarProps) {
   const location = useLocation()
   const isOfferPage = ['/p', '/b', '/l', '/a', '/j', '/i'].includes(location.pathname)
-  const price = isOfferPage ? '$1' : '$27'
+  const price = isOfferPage ? '$1' : (priceOverride ?? '$17')
 
   const scrollToPricing = () => {
     const pricingSection = document.getElementById('pricing')
@@ -38,6 +42,7 @@ export function Navbar() {
             data-event="cta_click"
             data-cta-type="start"
             data-cta-placement="nav"
+            data-price={price.replace('$', '')}
           >
             Start for {price}
           </Button>

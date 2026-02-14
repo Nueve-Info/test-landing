@@ -20,7 +20,11 @@ const logos = [
   { src: samsungLogo, alt: 'Samsung' },
 ]
 
-export function Hero() {
+interface HeroProps {
+  priceLabel?: string
+}
+
+export function Hero({ priceLabel = '$17' }: HeroProps) {
   const scrollToPricing = () => {
     const pricingSection = document.getElementById('pricing')
     if (pricingSection) {
@@ -136,8 +140,9 @@ export function Hero() {
                 data-event="cta_click"
                 data-cta-type="start"
                 data-cta-placement="hero"
+                data-price={priceLabel.replace('$', '')}
               >
-                Start for just $27
+                Start for just {priceLabel}
               </Button>
               
               <div className="flex items-center gap-2 text-[var(--color-text-muted)] text-sm font-medium">

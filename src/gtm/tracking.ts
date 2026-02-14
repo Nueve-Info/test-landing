@@ -51,11 +51,13 @@ if (!window.__gtmTrackingInstalled) {
 
     // Meta Pixel: Track AddToCart for "start" CTA buttons
     if (ctaType === 'start' && window.fbq) {
+      const priceAttr = attr(el, 'data-price')
+      const pixelValue = priceAttr ? Number(priceAttr) : 17
       window.fbq('track', 'AddToCart', {
         content_name: (el.innerText && el.innerText.trim()) || 'Start CTA',
         content_category: 'CTA',
         content_ids: ['start_cta'],
-        value: 27,
+        value: pixelValue,
         currency: 'USD'
       })
     }

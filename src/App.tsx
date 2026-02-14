@@ -12,13 +12,15 @@ import { OfferA } from './pages/OfferA'
 import { OfferJ } from './pages/OfferJ'
 import { OfferI } from './pages/OfferI'
 import { NueveFolioDirect17 } from './pages/NueveFolioDirect17'
+import { ValueOS } from './pages/ValueOS'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<OriginalLanding />} />
-        <Route path="/value" element={<NueveFolioDirect17 />} />
+        <Route path="/value-ts" element={<NueveFolioDirect17 />} />
+        <Route path="/value-os" element={<ValueOS />} />
         <Route path="/design-tool" element={<DesignToolVariant />} />
         <Route path="/dev-mode" element={<DevModeVariant />} />
         <Route path="/portfolio" element={<PortfolioVariant />} />

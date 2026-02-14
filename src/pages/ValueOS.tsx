@@ -18,8 +18,8 @@ const StatPill = ({ children }: { children: React.ReactNode }) => (
   </div>
 )
 
-export function NueveFolioDirect17() {
-  const price = 27
+export function ValueOS() {
+  const price = 17
   const priceLabel = `$${price}`
   const ctaLabel = `Join at the lowest price (${priceLabel})`
 
@@ -140,11 +140,11 @@ export function NueveFolioDirect17() {
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}>
               <Button
                 type="button"
-                onClick={() => window.location.assign('https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C')}
+                onClick={() => window.location.assign('https://buy.stripe.com/fZu4gy8bF7592k9adogA81I')}
                 size="lg"
                 className="bg-[#FD7E35] hover:bg-[#E0601A] text-white border-none rounded-full px-8 font-semibold text-lg shadow-[0_4px_14px_0_rgba(253,126,53,0.39)] hover:shadow-[0_6px_20px_rgba(253,126,53,0.23)] hover:-translate-y-1 transition-all"
                 data-event="cta_click"
-                data-cta-type="join_27"
+                data-cta-type="join_17"
                 data-cta-placement="hero"
               >
                 {ctaLabel}
@@ -186,7 +186,7 @@ export function NueveFolioDirect17() {
 
                 <div className="relative z-10 text-center mb-6">
                   <div className="inline-flex items-center gap-3 mb-2">
-                    <span className="bg-emerald-500 text-white text-sm font-bold px-3 py-1 rounded-full">95% OFF</span>
+                    <span className="bg-emerald-500 text-white text-sm font-bold px-3 py-1 rounded-full">96% OFF</span>
                   </div>
                   <div className="text-5xl sm:text-6xl font-bold bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-sm">
                     {priceLabel}
@@ -202,9 +202,9 @@ export function NueveFolioDirect17() {
                   variant="cta"
                   size="lg"
                   className="w-full text-lg font-bold bg-emerald-500 hover:bg-emerald-600 shadow-[0_4px_20px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_25px_rgba(16,185,129,0.6)] hover:scale-[1.02] transition-all duration-300 relative z-10"
-                  onClick={() => window.location.assign('https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C')}
+                  onClick={() => window.location.assign('https://buy.stripe.com/fZu4gy8bF7592k9adogA81I')}
                   data-event="cta_click"
-                  data-cta-type="join_27"
+                  data-cta-type="join_17"
                   data-cta-placement="offer"
                 >
                   {ctaLabel}

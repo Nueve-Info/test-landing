@@ -1,37 +1,20 @@
-import { useState, useEffect } from 'react'
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
 
-declare global {
-  interface Window {
-    posthog?: {
-      getFeatureFlag: (flag: string) => string | boolean | undefined
-      onFeatureFlags: (callback: () => void) => void
-    }
-  }
+interface FinalCTAProps {
+  price?: number
+  checkoutHref?: string
 }
 
-export function FinalCTA() {
-  const defaultUrl = 'https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C'
-  const [checkoutUrl, setCheckoutUrl] = useState(defaultUrl)
+const DEFAULT_STRIPE_URL = 'https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C'
 
-  useEffect(() => {
-    const checkFlag = () => {
-      if (window.posthog?.getFeatureFlag('Test-1') === 'test') {
-        setCheckoutUrl('/value')
-      } else {
-        setCheckoutUrl(defaultUrl)
-      }
-    }
-
-    // Check immediately in case flags are already loaded
-    checkFlag()
-
-    // Also listen for when flags are loaded
-    if (window.posthog?.onFeatureFlags) {
-      window.posthog.onFeatureFlags(checkFlag)
-    }
-  }, [])
+export function FinalCTA({
+  price = 17,
+  checkoutHref,
+}: FinalCTAProps) {
+  const priceLabel = `$${price}`
+  const href = checkoutHref ?? DEFAULT_STRIPE_URL
+  const isInternal = href.startsWith('/')
 
   return (
     <section className="py-24 bg-[var(--color-surface)] relative overflow-hidden">
@@ -55,18 +38,18 @@ export function FinalCTA() {
             variant="cta" 
             size="lg" 
             className="js-select-plan mb-8"
-            href={checkoutUrl}
-            target={checkoutUrl.startsWith('/') ? undefined : '_blank'}
-            rel={checkoutUrl.startsWith('/') ? undefined : 'noopener noreferrer'}
+            href={href}
+            target={isInternal ? undefined : '_blank'}
+            rel={isInternal ? undefined : 'noopener noreferrer'}
             data-event="select_plan"
             data-plan-type="early_adopter"
             data-billing="one_time"
-            data-price="27"
+            data-price={String(price)}
             data-currency="USD"
-            data-stripe-url="https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C"
+            data-stripe-url={DEFAULT_STRIPE_URL}
             data-cta-placement="final_cta"
           >
-            Claim Early Adopter Access ($27)
+            Claim Early Adopter Access ({priceLabel})
           </Button>
 
           {/* Trust seals */}
