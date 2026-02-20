@@ -11,14 +11,19 @@ import { FAQ } from '../components/sections/FAQ'
 import { FinalCTA } from '../components/sections/FinalCTA'
 import { Footer } from '../components/sections/Footer'
 import { Navbar } from '../components/Navbar'
+import { AnnouncementBar } from '../components/AnnouncementBar'
+import { useCountdown } from '../hooks/useCountdown'
 import { usePriceTest } from '../experiments/priceTest'
 
 export function OriginalLanding() {
-  const { price, priceLabel, checkoutHref } = usePriceTest()
+  const { price, priceLabel, priceId, variant } = usePriceTest()
+  const { isExpired, isPaused } = useCountdown()
+  const isTimerActive = !isExpired && !isPaused
 
   return (
     <main className="min-h-screen">
-      <Navbar priceOverride={priceLabel} />
+      <AnnouncementBar />
+      <Navbar priceOverride={priceLabel} isTimerActive={isTimerActive} />
       <Hero priceLabel={priceLabel} />
       <IndustrySplit />
       <Transformation />
@@ -27,9 +32,9 @@ export function OriginalLanding() {
       <Curriculum />
       <WhoIsFor />
       <SocialProof />
-      <Pricing price={price} checkoutHref={checkoutHref} />
+      <Pricing price={price} priceId={priceId} variant={variant} />
       <FAQ />
-      <FinalCTA price={price} checkoutHref={checkoutHref} />
+      <FinalCTA price={price} priceId={priceId} variant={variant} />
       <Footer />
     </main>
   )

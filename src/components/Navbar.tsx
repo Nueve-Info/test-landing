@@ -4,9 +4,10 @@ import { Button } from './ui/Button'
 
 interface NavbarProps {
   priceOverride?: string
+  isTimerActive?: boolean
 }
 
-export function Navbar({ priceOverride }: NavbarProps) {
+export function Navbar({ priceOverride, isTimerActive = false }: NavbarProps) {
   const location = useLocation()
   const isOfferPage = ['/p', '/b', '/l', '/a', '/j', '/i'].includes(location.pathname)
   const price = isOfferPage ? '$1' : (priceOverride ?? '$17')
@@ -22,7 +23,9 @@ export function Navbar({ priceOverride }: NavbarProps) {
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-[var(--color-surface-dark)]/80 backdrop-blur-md border-b border-[var(--color-surface-light)]/50"
+      className={`fixed left-0 right-0 z-50 bg-[var(--color-surface-dark)]/80 backdrop-blur-md border-b border-[var(--color-surface-light)]/50 transition-all duration-300 ${
+        isTimerActive ? 'top-[52px] md:top-[68px]' : 'top-0'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-12 sm:h-14">
