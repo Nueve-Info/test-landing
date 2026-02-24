@@ -46,6 +46,7 @@ function stripeApiPlugin(allEnv: Record<string, string>): Plugin {
             const Stripe = (await import('stripe')).default
             const stripe = new Stripe(secretKey)
             const siteUrl = allEnv.SITE_URL || process.env.SITE_URL || 'http://localhost:5174'
+            console.log('[vite-stripe-api] return_url →', `${siteUrl}/thank-you`)
 
             const session = await stripe.checkout.sessions.create({
               ui_mode: 'embedded',
@@ -78,5 +79,9 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), tailwindcss(), stripeApiPlugin(allEnv)],
+    server: {
+      port: 5174,
+      strictPort: true,
+    },
   }
 })

@@ -57,6 +57,8 @@ export function CheckoutModal({
         priceId,
         ab_experiment: 'price-test',
         ab_variant: abVariant,
+        funnel_id: 'DE__Engineer-AI',
+        landing_url: window.location.href,
       }),
     })
 

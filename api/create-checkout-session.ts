@@ -19,8 +19,9 @@ function getStripe(): Stripe {
 /* ── Allowed origins for CORS ── */
 const ALLOWED_ORIGINS = [
   process.env.SITE_URL,
+  "https://int.nueve.design",
+  "http://localhost:5174",
   "http://localhost:5173",
-  "http://localhost:3000",
   "http://localhost:4173",
 ].filter(Boolean) as string[]
 
@@ -73,6 +74,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       metadata: {
         ab_experiment: typeof body.ab_experiment === "string" ? body.ab_experiment : "none",
         ab_variant: typeof body.ab_variant === "string" ? body.ab_variant : "control",
+        funnel_id: typeof body.funnel_id === "string" ? body.funnel_id : "unknown",
+        landing_url: typeof body.landing_url === "string" ? body.landing_url : "unknown",
       },
     })
 
