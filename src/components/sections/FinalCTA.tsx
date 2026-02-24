@@ -1,20 +1,38 @@
+import { useState } from 'react'
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
+import { CheckoutModal } from '../EmbeddedCheckout'
+import { trackMeta, capturePosthog } from '../../lib/analytics'
 
 interface FinalCTAProps {
   price?: number
-  checkoutHref?: string
+  priceId?: string
+  variant?: string
 }
-
-const DEFAULT_STRIPE_URL = 'https://buy.stripe.com/5kQaEW3VpexB1g5etEgA81C'
 
 export function FinalCTA({
   price = 17,
-  checkoutHref,
+  priceId = '',
+  variant = 'control',
 }: FinalCTAProps) {
   const priceLabel = `$${price}`
-  const href = checkoutHref ?? DEFAULT_STRIPE_URL
-  const isInternal = href.startsWith('/')
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
+
+  const handleCheckout = () => {
+    trackMeta('InitiateCheckout', {
+      content_name: 'Nueve Design Engineer',
+      value: price,
+      currency: 'USD',
+    })
+    capturePosthog('InitiateCheckout', {
+      label: 'Claim Early Adopter Access',
+      path: window.location.pathname,
+      ab_experiment: 'price-test',
+      ab_variant: variant,
+      price,
+    })
+    setIsCheckoutOpen(true)
+  }
 
   return (
     <section className="py-24 bg-[var(--color-surface)] relative overflow-hidden">
@@ -33,20 +51,17 @@ export function FinalCTA({
             Join the Design Engineer transformation today. Build your AI-powered portfolio this weekend.
           </p>
 
-          <Button 
+          <Button
             type="button"
-            variant="cta" 
-            size="lg" 
+            variant="cta"
+            size="lg"
             className="js-select-plan mb-8"
-            href={href}
-            target={isInternal ? undefined : '_blank'}
-            rel={isInternal ? undefined : 'noopener noreferrer'}
+            onClick={handleCheckout}
             data-event="select_plan"
             data-plan-type="early_adopter"
             data-billing="one_time"
             data-price={String(price)}
             data-currency="USD"
-            data-stripe-url={DEFAULT_STRIPE_URL}
             data-cta-placement="final_cta"
           >
             Claim Early Adopter Access ({priceLabel})
@@ -75,6 +90,13 @@ export function FinalCTA({
           </div>
         </div>
       </Container>
+
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        priceId={priceId}
+        abVariant={variant}
+        onClose={() => setIsCheckoutOpen(false)}
+      />
     </section>
   )
 }

@@ -1,5 +1,5 @@
 {
-  "name": "firstlanding",
+  "name": "de__engineer-ai",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,11 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^5.6.0",
+    "@stripe/stripe-js": "^8.7.0",
     "@tailwindcss/vite": "^4.1.18",
     "framer-motion": "^12.29.2",
+    "lucide-react": "^0.575.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.0",
+    "stripe": "^20.3.1",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
@@ -22,6 +26,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@vercel/node": "^5.6.6",
     "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",

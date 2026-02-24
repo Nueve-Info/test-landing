@@ -2,16 +2,25 @@ import { Container } from '../components/ui/Container'
 import { BackgroundGlow } from '../components/ui/BackgroundGlow'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { trackMeta, capturePosthog } from '../lib/analytics'
 
 export function ThankYou() {
+  const [searchParams] = useSearchParams()
+
   useEffect(() => {
-    if (window.fbq) {
-      window.fbq('track', 'Purchase', {
-        currency: 'USD',
-        value: 97.00 // Default value for early access
-      });
-    }
-  }, []);
+    const sessionId = searchParams.get('session_id')
+
+    trackMeta('Purchase', {
+      content_name: 'Nueve Design Engineer',
+      currency: 'USD',
+    })
+
+    capturePosthog('Purchase', {
+      session_id: sessionId,
+      path: window.location.pathname,
+    })
+  }, [searchParams]);
 
   // Floating particles for delight
   const particles = Array.from({ length: 12 })
