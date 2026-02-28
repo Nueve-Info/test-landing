@@ -5,7 +5,17 @@ import {
   EmbeddedCheckoutProvider,
 } from '@stripe/react-stripe-js'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Lock, Check, BookOpen, Cpu, LayoutTemplate, Palette } from 'lucide-react'
+import {
+  Mail,
+  Users,
+  MonitorPlay,
+  CalendarCheck,
+  MessageSquare,
+  Rocket,
+  Wand2,
+  Lock,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
 let _stripePromise: ReturnType<typeof loadStripe> | null = null
 function getStripePromise() {
@@ -17,28 +27,86 @@ function getStripePromise() {
   return _stripePromise
 }
 
-const benefits = [
+/* ── Tier-specific action plans ── */
+
+interface Step {
+  icon: LucideIcon
+  title: string
+  description: string
+}
+
+const DIY_STEPS: Step[] = [
   {
-    icon: BookOpen,
-    title: 'NueveFolio 2.0 Complete Course',
+    icon: Mail,
+    title: 'Check your inbox',
+    description: 'Welcome email with login credentials arrives instantly',
   },
   {
-    icon: Cpu,
-    title: 'AI Agent System Access',
+    icon: MonitorPlay,
+    title: 'Access the course platform',
+    description: 'Week 1 opens on March 2nd',
   },
   {
-    icon: LayoutTemplate,
-    title: 'Custom Portfolio Template Library',
+    icon: Wand2,
+    title: 'Build with AI Agent',
+    description: 'Use the AI agent to generate portfolio content fast',
   },
   {
-    icon: Palette,
-    title: 'Animation Toolkit',
+    icon: CalendarCheck,
+    title: 'Follow the weekly roadmap',
+    description: 'New module unlocks each week, one section at a time',
   },
-] as const
+  {
+    icon: Rocket,
+    title: 'Export & launch',
+    description: 'Publish your portfolio and start getting interviews',
+  },
+]
+
+const MENTOR_STEPS: Step[] = [
+  {
+    icon: Mail,
+    title: 'Check your inbox',
+    description: 'Welcome email with login credentials arrives instantly',
+  },
+  {
+    icon: Users,
+    title: 'Join the community',
+    description: 'Get your invitation to our private group',
+  },
+  {
+    icon: MonitorPlay,
+    title: 'Access the course platform',
+    description: 'Week 1 opens on March 2nd',
+  },
+  {
+    icon: CalendarCheck,
+    title: 'Follow the weekly roadmap',
+    description: 'New module unlocks each week alongside your cohort',
+  },
+  {
+    icon: MessageSquare,
+    title: 'Get mentor feedback',
+    description: 'Submit your work and receive actionable reviews',
+  },
+  {
+    icon: Rocket,
+    title: 'Complete & launch',
+    description: 'Finish your portfolio with confidence, week by week',
+  },
+]
+
+function getStepsForTier(tierName: string): Step[] {
+  if (tierName === 'Mentor Support') return MENTOR_STEPS
+  return DIY_STEPS
+}
+
+/* ── Component ── */
 
 interface CheckoutModalProps {
   isOpen: boolean
   priceId: string
+  tierName: string
   abVariant: string
   onClose: () => void
 }
@@ -46,6 +114,7 @@ interface CheckoutModalProps {
 export function CheckoutModal({
   isOpen,
   priceId,
+  tierName,
   abVariant,
   onClose,
 }: CheckoutModalProps) {
@@ -72,20 +141,13 @@ export function CheckoutModal({
   }, [priceId, abVariant])
 
   useEffect(() => {
-    if (!isOpen) return
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [isOpen, onClose])
-
-  useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => {
       document.body.style.overflow = ''
     }
   }, [isOpen])
+
+  const steps = getStepsForTier(tierName)
 
   return (
     <AnimatePresence>
@@ -101,7 +163,6 @@ export function CheckoutModal({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-            onClick={onClose}
             aria-hidden
           />
 
@@ -112,52 +173,47 @@ export function CheckoutModal({
             aria-label="Checkout"
             className="relative flex max-h-[90vh] w-full max-w-5xl flex-col overflow-y-auto rounded-2xl bg-white animate-in fade-in duration-200 lg:flex-row lg:overflow-hidden"
           >
-            {/* Close button */}
-            <button
-              onClick={onClose}
-              className="absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-black transition-colors hover:bg-black/10 lg:bg-white/10 lg:text-white lg:hover:bg-white/20"
-              aria-label="Close checkout"
-            >
-              <X className="h-4 w-4" />
-            </button>
-
-            {/* Benefits panel (left / top) */}
+            {/* ── Action plan panel (left / top) ── */}
             <div className="shrink-0 bg-gradient-to-b from-white to-[#FD7E35]/[0.03] px-5 py-5 sm:px-8 sm:py-6 lg:w-1/2 lg:overflow-y-auto lg:py-10">
               <p className="text-[10px] font-black uppercase tracking-widest text-[#FD7E35] lg:text-xs">
-                What you'll unlock
+                Here's your action plan
               </p>
               <h3 className="mt-1.5 text-lg font-black tracking-tight text-black lg:mt-2 lg:text-2xl">
-                Everything in one program
+                What happens after you sign up
               </h3>
 
-              <ul className="mt-4 flex flex-col gap-0 divide-y divide-black/[0.06] lg:mt-8 lg:gap-3 lg:divide-y-0">
-                {benefits.map((b, i) => (
+              <ol className="mt-3 flex flex-col gap-0 lg:mt-10">
+                {steps.map((step, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-3 py-2.5 lg:gap-4 lg:rounded-xl lg:border lg:border-black/[0.06] lg:bg-black/[0.02] lg:p-3 lg:py-3 lg:transition-colors lg:hover:border-[#FD7E35]/20 lg:hover:bg-[#FD7E35]/[0.03]"
+                    className="relative flex gap-2.5 pb-3.5 lg:gap-5 lg:pb-7"
                   >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#FD7E35]/10 lg:h-10 lg:w-10 lg:bg-white lg:shadow-sm lg:ring-1 lg:ring-black/5">
-                      <b.icon
-                        className="h-4 w-4 text-[#FD7E35] lg:h-5 lg:w-5"
-                        strokeWidth={1.5}
-                      />
+                    {/* Timeline connector line */}
+                    {i < steps.length - 1 && (
+                      <div className="absolute left-[13px] top-[30px] bottom-0 w-px bg-[#FD7E35]/15 lg:left-[23px] lg:top-[50px]" />
+                    )}
+
+                    {/* Step number circle */}
+                    <div className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#FD7E35]/10 lg:h-12 lg:w-12">
+                      <span className="text-[11px] font-black text-[#FD7E35] lg:text-base">{i + 1}</span>
                     </div>
-                    <span className="flex-1 text-[13px] font-semibold text-black lg:text-sm lg:font-bold">
-                      {b.title}
-                    </span>
-                    <Check
-                      className="h-3.5 w-3.5 shrink-0 text-[#FD7E35]/40 lg:hidden"
-                      strokeWidth={2.5}
-                    />
-                    <div className="hidden lg:flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FD7E35]/10">
-                      <Check className="h-3 w-3 text-[#FD7E35]" strokeWidth={3} />
+
+                    {/* Step content */}
+                    <div className="flex-1 pt-0.5 lg:pt-2">
+                      <p className="flex items-center gap-1.5 text-[12px] font-bold text-black lg:gap-2 lg:text-base">
+                        <step.icon className="h-3 w-3 text-[#FD7E35]/60 lg:h-[18px] lg:w-[18px]" strokeWidth={1.5} />
+                        {step.title}
+                      </p>
+                      <p className="mt-0.5 text-[11px] leading-relaxed text-gray-500 lg:mt-1 lg:text-sm">
+                        {step.description}
+                      </p>
                     </div>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
 
-            {/* Checkout column (right / bottom) */}
+            {/* ── Checkout column (right / bottom) ── */}
             <div className="flex-1 bg-[var(--color-surface-dark)] lg:overflow-y-auto lg:w-1/2">
               <div className="flex items-center justify-center gap-1.5 px-6 pb-2 pt-6 sm:px-8 lg:pt-10">
                 <Lock className="h-3 w-3 text-white/40" />

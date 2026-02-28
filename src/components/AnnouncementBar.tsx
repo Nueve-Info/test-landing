@@ -44,7 +44,7 @@ export function AnnouncementBar() {
         <div className="flex items-center gap-2">
           <Flame className="h-5 w-5 text-white shrink-0 animate-pulse" />
           <span className="text-xs md:text-sm font-black uppercase tracking-[0.2em] text-white">
-            Early Bird Ends
+            Pioneer Access Ends
           </span>
         </div>
 

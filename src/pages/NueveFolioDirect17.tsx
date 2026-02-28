@@ -19,7 +19,7 @@ const StatPill = ({ children }: { children: React.ReactNode }) => (
 )
 
 export function NueveFolioDirect17() {
-  const price = 27
+  const price = 37
   const priceLabel = `$${price}`
   const ctaLabel = `Join at the lowest price (${priceLabel})`
 
