@@ -116,7 +116,7 @@ export function CheckoutModal({
   priceId,
   tierName,
   abVariant,
-  onClose,
+  onClose: _onClose,
 }: CheckoutModalProps) {
   const fetchClientSecret = useCallback(async () => {
     const res = await fetch('/api/create-checkout-session', {

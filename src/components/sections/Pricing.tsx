@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
 import { BackgroundGlow } from '../ui/BackgroundGlow'
 import { useCountdown } from '../../hooks/useCountdown'
