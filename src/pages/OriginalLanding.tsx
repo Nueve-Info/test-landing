@@ -32,7 +32,7 @@ export function OriginalLanding() {
       <Curriculum />
       <WhoIsFor />
       <SocialProof />
-      <Pricing price={price} priceId={priceId} variant={variant} />
+      <Pricing />
       <FAQ />
       <FinalCTA price={price} priceId={priceId} variant={variant} />
       <Footer />

@@ -1,4 +1,4 @@
-# FirstLanding — Project Brief (Local Only)
+# DE__Engineer-AI — Project Brief (Local Only)
 
 ## Goal
 Build a local-only landing page (no backend) in the existing Vite + React + Tailwind project inside this folder.

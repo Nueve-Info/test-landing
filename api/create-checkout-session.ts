@@ -27,13 +27,13 @@ const ALLOWED_ORIGINS = [
 
 /* ── Known Price IDs ──
  *
- *  STRIPE_PRICE_CONTROL → control group price ($27)
- *  STRIPE_PRICE_TEST    → test group price ($17)
+ *  STRIPE_PRICE_TIER1 → Tier 1 "Do It Yourself" ($37)
+ *  STRIPE_PRICE_TIER2 → Tier 2 "Mentor Support" ($57)
  */
 const KNOWN_PRICE_IDS = new Set(
   [
-    process.env.STRIPE_PRICE_CONTROL,
-    process.env.STRIPE_PRICE_TEST,
+    process.env.STRIPE_PRICE_TIER1,
+    process.env.STRIPE_PRICE_TIER2,
   ].filter(Boolean)
 )
 
@@ -71,6 +71,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       mode: "payment",
       line_items: [{ price: priceId, quantity: 1 }],
       return_url: returnUrl,
+      custom_fields: [
+        {
+          key: "full_name",
+          label: { type: "custom", custom: "Full name" },
+          type: "text",
+          optional: true,
+        },
+      ],
+      consent_collection: {
+        terms_of_service: "required",
+      },
       metadata: {
         ab_experiment: typeof body.ab_experiment === "string" ? body.ab_experiment : "none",
         ab_variant: typeof body.ab_variant === "string" ? body.ab_variant : "control",

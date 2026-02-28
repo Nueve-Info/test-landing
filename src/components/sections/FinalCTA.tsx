@@ -94,6 +94,7 @@ export function FinalCTA({
       <CheckoutModal
         isOpen={isCheckoutOpen}
         priceId={priceId}
+        tierName="Do It Yourself"
         abVariant={variant}
         onClose={() => setIsCheckoutOpen(false)}
       />

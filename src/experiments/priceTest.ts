@@ -4,7 +4,7 @@ import { capturePosthog } from '../lib/analytics'
 /**
  * PostHog experiment: `price-test`
  *
- * - control (default): $27, CTA → /value-ts
+ * - control (default): $37, CTA → /value-ts
  * - test:              $17, CTA → /value-os
  */
 
@@ -20,8 +20,8 @@ const STRIPE_PRICE_CONTROL = import.meta.env.VITE_STRIPE_PRICE_CONTROL || 'price
 const STRIPE_PRICE_TEST = import.meta.env.VITE_STRIPE_PRICE_TEST || 'price_1T2WGuBskYNJtWpXEbqq50rM'
 
 const CONTROL: PriceTestResult = {
-  price: 27,
-  priceLabel: '$27',
+  price: 37,
+  priceLabel: '$37',
   checkoutHref: '/value-ts',
   priceId: STRIPE_PRICE_CONTROL,
   variant: 'control',
